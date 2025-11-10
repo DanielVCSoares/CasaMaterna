@@ -1,22 +1,29 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
-import Home from "./pages/Home.tsx";
-import About from "./pages/About.tsx";
-import Contact from "./pages/Contact.tsx";
+type Page = "home" | "about" | "contact";
 
 const App: React.FC = () => {
+  const [currentPage, setPage] = useState<Page>("home");
+
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Header />
-      <main className="flex-1 p-6">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+    <div className="flex flex-col min-h-screen">
+      {/* Header com controle de página */}
+      <Header currentPage={currentPage} setPage={setPage} />
+
+      {/* Conteúdo principal */}
+      <main className="flex-grow">
+        {currentPage === "home" && <Home setPage={setPage} />}
+        {currentPage === "about" && <About />}
+        {currentPage === "contact" && <Contact />}
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

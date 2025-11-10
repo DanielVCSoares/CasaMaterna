@@ -1,0 +1,39 @@
+footer a {
+  transition: color 0.3s;
+}
+
+.footer-container {
+  background-color: #00838F; /* fundo do rodapé */
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 140px; /* tamanho da logo */
+  height: auto;
+  object-fit: contain;
+  background: transparent; /* evita fundo sólido */
+  mix-blend-mode: multiply; /* ajuda a mesclar o branco com o fundo */
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  color: #e0f7fa;
+}

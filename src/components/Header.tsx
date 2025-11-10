@@ -1,53 +1,46 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import logo from "../assets/IA sem fundo.png";
 
-const Header: React.FC = () => {
-  const baseClass =
-    "nav-link px-3 py-2 rounded-full text-sm font-medium transition-colors duration-200";
+type HeaderProps = {
+  currentPage: "home" | "about" | "contact";
+  setPage: React.Dispatch<React.SetStateAction<"home" | "about" | "contact">>;
+};
+
+const Header: React.FC<HeaderProps> = ({ currentPage, setPage }) => {
+  const getButtonClass = (page: "home" | "about" | "contact") => {
+    const base =
+      "nav-link px-3 py-2 rounded-full text-sm font-medium transition-colors duration-200";
+    return currentPage === page
+      ? `${base} bg-[#00838F] text-white shadow-md hover:bg-opacity-90`
+      : `${base} text-[#263238] hover:bg-[#E0F7FA]`;
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
-        <NavLink to="/" className="text-left focus:outline-none">
-          <div className="text-2xl font-bold text-[#00838F] tracking-tight">
-            <span className="block">Equipe</span>
-            <span className="block text-sm font-normal text-gray-600 -mt-1">Vida Nova</span>
-          </div>
-        </NavLink>
+        {/* Logo em PNG */}
+        <button
+          onClick={() => setPage("home")}
+          className="focus:outline-none"
+        >
+          <img
+            src={logo} // caminho da sua logo
+            alt="Logo Casa Materna"
+            className="h-16 w-auto hover:scale-105 transition-transform duration-200"
+          />
+        </button>
 
+        {/* Navegação */}
         <nav className="flex space-x-2 sm:space-x-4">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? `${baseClass} bg-[#00838F] text-white shadow-md hover:bg-opacity-90`
-                : `${baseClass} text-[#263238] hover:bg-[#E0F7FA]`
-            }
-          >
+          <button onClick={() => setPage("home")} className={getButtonClass("home")}>
             Home
-          </NavLink>
-
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive
-                ? `${baseClass} bg-[#00838F] text-white shadow-md hover:bg-opacity-90`
-                : `${baseClass} text-[#263238] hover:bg-[#E0F7FA]`
-            }
-          >
+          </button>
+          <button onClick={() => setPage("about")} className={getButtonClass("about")}>
             Sobre
-          </NavLink>
-
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive
-                ? `${baseClass} bg-[#00838F] text-white shadow-md hover:bg-opacity-90`
-                : `${baseClass} text-[#263238] hover:bg-[#E0F7FA]`
-            }
-          >
+          </button>
+          <button onClick={() => setPage("contact")} className={getButtonClass("contact")}>
             Contato
-          </NavLink>
+          </button>
         </nav>
       </div>
     </header>
